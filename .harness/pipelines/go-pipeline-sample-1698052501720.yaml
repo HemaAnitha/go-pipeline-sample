@@ -18,30 +18,14 @@ pipeline:
           execution:
             steps:
               - step:
-                  identifier: gobuild
-                  name: go_build
-                  spec:
-                    command: go build
-                  timeout: ""
                   type: Run
-              - step:
-                  identifier: gotest
-                  name: go_test
+                  identifier: build_go_app
+                  name: Build Go App
                   spec:
-                    command: go test -v ./...
-                  timeout: ""
-                  type: Run
-              - step:
-                  identifier: dockerbuild
-                  name: docker_build
-                  spec:
-                    image: plugins/docker
-                    settings:
-                      dry_run: "true"
-                      repo: hello/world
-                      tags: latest
-                  timeout: ""
-                  type: Plugin
+                    command: |-
+                      echo "Welcome to Harness CI"
+                      go build
+                      go test
           platform:
             arch: Amd64
             os: Linux
